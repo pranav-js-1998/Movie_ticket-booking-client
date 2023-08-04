@@ -67,7 +67,7 @@ const Home = () => {
                     </ul>
                     <Link
                       className="btn btn-dark btn-sm"
-                      to={"/booking"+movie.id}
+                      to={"/booking/"+movie.id}
                     >
                       Book Tickets
                     </Link>
