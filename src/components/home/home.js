@@ -4,11 +4,12 @@ import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { AuthStatus } from "../../context/context";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const {authStatus} = useContext (AuthStatus)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -65,12 +66,20 @@ const Home = () => {
                         <strong>Description:</strong> {movie.description}
                       </li>
                     </ul>
-                    <Link
-                      className="btn btn-dark btn-sm"
-                      to={"/booking/"+movie.id}
-                    >
-                      Book Tickets
-                    </Link>
+                    {authStatus ?(
+                        <>
+                          <Link
+                            to={"/booking/" + movie.id}
+                            className="btn btn-outline-primary btn-sm"
+                          >
+                            Book Ticket
+                          </Link>
+                        </>
+                      ):(
+                        <> 
+                        <p> Please login to book ticket </p>
+                        </>
+                      )}
                   </div>
                 </div>
                 
