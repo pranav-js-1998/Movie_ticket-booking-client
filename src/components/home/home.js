@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import "./home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [movieList, setMovieList] = useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7017/api/Movie/Reterive/All"
+          "https://movietktbooking.azurewebsites.net/api/Movie/Reterive/All"
         );
         setMovieList(response.data);
         setLoading(false);
@@ -64,12 +65,12 @@ const Home = () => {
                         <strong>Description:</strong> {movie.description}
                       </li>
                     </ul>
-                    <button
+                    <Link
                       className="btn btn-dark btn-sm"
-                      onClick={() => handleBookTicket(movie.id)}
+                      to={"/booking"+movie.id}
                     >
                       Book Tickets
-                    </button>
+                    </Link>
                   </div>
                 </div>
                 
